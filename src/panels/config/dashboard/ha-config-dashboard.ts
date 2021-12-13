@@ -90,7 +90,6 @@ class HaConfigDashboard extends LitElement {
                   <ha-config-navigation
                     .hass=${this.hass}
                     .narrow=${this.narrow}
-                    .externalConfig=${this._externalConfig}
                     .showAdvanced=${this.showAdvanced}
                     .pages=${configSections.dashboard}
                   ></ha-config-navigation>
