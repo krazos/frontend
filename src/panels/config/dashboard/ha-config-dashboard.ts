@@ -1,25 +1,14 @@
 import { mdiCloudLock } from "@mdi/js";
 import "@polymer/app-layout/app-header/app-header";
 import "@polymer/app-layout/app-toolbar/app-toolbar";
-import {
-  css,
-  CSSResultGroup,
-  html,
-  LitElement,
-  PropertyValues,
-  TemplateResult,
-} from "lit";
-import { customElement, property, state } from "lit/decorators";
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from "lit";
+import { customElement, property } from "lit/decorators";
 import { isComponentLoaded } from "../../../common/config/is_component_loaded";
 import "../../../components/ha-card";
 import "../../../components/ha-icon-next";
 import "../../../components/ha-menu-button";
 import { CloudStatus } from "../../../data/cloud";
 import { SupervisorAvailableUpdates } from "../../../data/supervisor/supervisor";
-import {
-  ExternalConfig,
-  getExternalConfig,
-} from "../../../external_app/external_config";
 import "../../../layouts/ha-app-layout";
 import { haStyle } from "../../../resources/styles";
 import { HomeAssistant } from "../../../types";
@@ -42,18 +31,6 @@ class HaConfigDashboard extends LitElement {
   @property() public supervisorUpdates?: SupervisorAvailableUpdates[] | null;
 
   @property() public showAdvanced!: boolean;
-
-  @state() private _externalConfig?: ExternalConfig;
-
-  protected firstUpdated(changedProps: PropertyValues) {
-    super.firstUpdated(changedProps);
-
-    if (this.hass && this.hass.auth.external) {
-      getExternalConfig(this.hass.auth.external).then((conf) => {
-        this._externalConfig = conf;
-      });
-    }
-  }
 
   protected render(): TemplateResult {
     return html`
