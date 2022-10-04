@@ -102,6 +102,26 @@ class HaSceneDashboard extends LitElement {
           filterable: true,
           direction: "asc",
           grows: true,
+          template: narrow
+          ? (name, scene: any) => {
+              const date = new Date(scene.attributes.last_activated);
+              const now = new Date();
+              const dayDifference = differenceInDays(now, date);
+              return html`
+                ${name}
+                <div class="secondary">
+                  ${this.hass.localize(
+                    "ui.panel.config.scene.picker.headers.last_activated"
+                  )}:
+                  ${scene.attributes.last_activated
+                    ? dayDifference > 3
+                      ? formatShortDateTime(date, this.hass.locale)
+                      : relativeTime(date, this.hass.locale)
+                    : this.hass.localize("ui.components.relative_time.never")}
+                </div>
+              `;
+            }
+          : undefined,
         },
       };
       if (!narrow) {
