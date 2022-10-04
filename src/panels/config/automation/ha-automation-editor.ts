@@ -230,6 +230,11 @@ export class HaAutomationEditor extends KeyboardShortcutMixin(LitElement) {
 
           <mwc-list-item
             .disabled=${!this._readOnly && !this.automationId}
+            .label=${this.hass.localize(
+              this._readOnly
+                ? "ui.panel.config.automation.editor.migrate"
+                : "ui.panel.config.automation.editor.duplicate"
+            )}
             graphic="icon"
             @click=${this._duplicate}
           >
